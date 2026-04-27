@@ -222,3 +222,10 @@ Soumettez le lien GitHub sur **Classroom** avant le **28/04/2026**.
 | Système d’authentification (login/logout) | +2 pts |
 | Plus d’une table avec relation entre elles | +2 pts |
 | **Total bonus** | **+9 pts** |
+
+---
+
+## 🌍 Déploiement en Ligne
+
+Le projet a été déployé sur **Render** et est accessible à cette adresse :  
+👉 **[https://projet-django-2-qjcu.onrender.com/](https://projet-django-2-qjcu.onrender.com/)**
