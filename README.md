@@ -3,9 +3,11 @@
 **Module :** 🐍 Programmation Python Avancée | **Niveau :** 🎓 3E Info  
 **Enseignant :** 👨‍🏫 Dr. Sghaier Amra | **Date limite :** ⏰ 28/04/2026
 
-<img src="image.png" width="400" alt="Capture d'écran 1">
-<img src="image1.png" width="400" alt="Capture d'écran 2">
-<img src="image2.png" width="400" alt="Capture d'écran 3">
+<div style="display: flex; flex-wrap: wrap; width: 820px;">
+    <img src="image.png" width="400" alt="Capture d'écran 1">
+    <img src="image1.png" width="400" alt="Capture d'écran 2">
+    <img src="image2.png" width="400" alt="Capture d'écran 3" style="margin-top: 10px;">
+</div>
 
 ---
 
