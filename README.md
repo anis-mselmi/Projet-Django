@@ -4,11 +4,11 @@
 **Enseignant :** 👨‍🏫 Dr. Sghaier Amra | **Date limite :** ⏰ 28/04/2026
 
 <div>
-    <div style="display: flex;">
+    <div style="display: flex; justify-content: center; gap: 20px;">
         <img src="image.png" width="400" alt="Capture d'écran 1">
         <img src="image1.png" width="400" alt="Capture d'écran 2">
     </div>
-    <div style="margin-top: 10px;">
+    <div style="display: flex; justify-content: center; margin-top: 10px;">
         <img src="image2.png" width="400" alt="Capture d'écran 3">
     </div>
 </div>
