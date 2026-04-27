@@ -1,0 +1,49 @@
+{% extends "students/base.html" %}
+{% block content %}
+<h2>Students</h2>
+
+<!-- Search bar -->
+<form method="GET" class="mb-3">
+  <div class="input-group">
+    <input type="text" name="q" value="{{ query }}"
+           class="form-control" placeholder="Search by name...">
+    <button class="btn btn-primary">Search</button>
+  </div>
+</form>
+
+<table class="table table-striped">
+  <thead>
+    <tr><th>Photo</th><th>Name</th><th>Email</th><th>Department</th><th>Grade</th><th>Actions</th></tr>
+  </thead>
+  <tbody>
+  {% for s in students %}
+    <tr>
+      <td>{% if s.photo %}<img src="{{ s.photo.url }}" width="40" class="rounded-circle">{% endif %}</td>
+      <td>{{ s.first_name }} {{ s.last_name }}</td>
+      <td>{{ s.email }}</td>
+      <td>{{ s.department.name|default:"-" }}</td>
+      <td>{{ s.gpa }}</td>
+      <td>
+        {% if user.is_authenticated %}
+        <a href="{% url 'student_update' s.pk %}" class="btn btn-sm btn-warning">Edit</a>
+        <a href="{% url 'student_delete' s.pk %}" class="btn btn-sm btn-danger">Delete</a>
+        {% endif %}
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<!-- Pagination -->
+{% if students.has_other_pages %}
+<nav><ul class="pagination">
+  {% if students.has_previous %}
+    <li class="page-item"><a class="page-link" href="?page={{ students.previous_page_number }}&q={{ query }}">Prev</a></li>
+  {% endif %}
+  <li class="page-item active"><span class="page-link">{{ students.number }}/{{ students.paginator.num_pages }}</span></li>
+  {% if students.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ students.next_page_number }}&q={{ query }}">Next</a></li>
+  {% endif %}
+</ul></nav>
+{% endif %}
+{% endblock %}
