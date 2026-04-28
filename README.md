@@ -225,7 +225,7 @@ Soumettez le lien GitHub sur **Classroom** avant le **28/04/2026**.
 
 ---
 
-## 🌍 Déploiement en Ligne
+## 🌍 Déploiement en Ligne Render
 
 Le projet a été déployé sur **Render** et est accessible à cette adresse :  
 👉 **[https://projet-django-2-qjcu.onrender.com/](https://projet-django-2-qjcu.onrender.com/)**
