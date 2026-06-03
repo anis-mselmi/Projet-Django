@@ -61,11 +61,9 @@ class StudentForm(forms.ModelForm):
         dept_name_raw = self.cleaned_data.get('department', '')
         dept_name = dept_name_raw.strip()
         if dept_name:
-            # Normalize display name (title case) but look up case-insensitively
-            normalized = dept_name.title()
             dept = Department.objects.filter(name__iexact=dept_name).first()
             if not dept:
-                dept = Department.objects.create(name=normalized)
+                dept = Department.objects.create(name=dept_name.title())
             student.department = dept
         else:
             student.department = None
