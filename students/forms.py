@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from .models import Student, Department
 
 class StudentForm(forms.ModelForm):
@@ -46,7 +47,9 @@ class StudentForm(forms.ModelForm):
         # Handle department free-text input
         dept_name = self.cleaned_data.get('department', '').strip()
         if dept_name:
-            dept, _ = Department.objects.get_or_create(name=dept_name)
+            dept = Department.objects.filter(name__iexact=dept_name).first()
+            if not dept:
+                dept = Department.objects.create(name=dept_name.title())
             student.department = dept
         else:
             student.department = None
@@ -63,3 +66,11 @@ class StudentForm(forms.ModelForm):
         if commit:
             student.save()
         return student
+
+    def clean_gpa(self):
+        gpa = self.cleaned_data.get('gpa')
+        if gpa is None:
+            raise ValidationError('GPA must be a number between 0.0 and 4.0.')
+        if gpa < 0.0 or gpa > 4.0:
+            raise ValidationError('GPA must be between 0.0 and 4.0.')
+        return gpa
