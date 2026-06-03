@@ -114,7 +114,7 @@ python manage.py migrate
 - `makemigrations` — lit votre `models.py` et crée un fichier de migration décrivant les modifications
 - `migrate` — applique ces modifications à la base de données SQLite3 (crée la table réelle)
 
-> Si `makemigrations` indique "No changes detected", votre fichier `models.py` n'est peut-être pas enregistré correctement. Sélectionnez tout, supprimez, collez à nouveau et appuyez sur Ctrl+S.
+> Si `makemigrations` indique "No changes detected", votre fichier `models.py` n'est peut-être pas enregistré correctement. Sélectionnez tout, supprimez, collez à nouveau et appuyez sur Ctrl+S (ou Cmd+S sur macOS) pour enregistrer.
 
 ### 5. Lancer le serveur de développement
 
