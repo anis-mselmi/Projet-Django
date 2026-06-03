@@ -70,7 +70,13 @@ class StudentForm(forms.ModelForm):
     def clean_gpa(self):
         gpa = self.cleaned_data.get('gpa')
         if gpa is None:
+            raise ValidationError('GPA is required.')
+
+        try:
+            gpa_value = float(gpa)
+        except (TypeError, ValueError):
             raise ValidationError('GPA must be a number between 0.0 and 4.0.')
-        if gpa < 0.0 or gpa > 4.0:
+
+        if gpa_value < 0.0 or gpa_value > 4.0:
             raise ValidationError('GPA must be between 0.0 and 4.0.')
         return gpa
