@@ -2,7 +2,13 @@ from django import forms
 from django.core.exceptions import ValidationError
 from .models import Student, Department
 
+
 class StudentForm(forms.ModelForm):
+    """Form for creating and editing Student records.
+    
+    This form provides a user-friendly interface for managing student information,
+    including validation for GPA and automatic department creation/lookup.
+    """
     # Free-text field — user types any department name
     department = forms.CharField(
         required=False,
@@ -27,7 +33,9 @@ class StudentForm(forms.ModelForm):
                 attrs={'class': 'form-control'}),
             'gpa': forms.NumberInput(
                 attrs={'class': 'form-control',
-                       'step': '0.01'}),
+                       'step': '0.01',
+                       'min': '0.0',
+                       'max': '4.0'}),
             'photo': forms.FileInput(
                 attrs={'class': 'form-control'}),
         }
@@ -54,7 +62,21 @@ class StudentForm(forms.ModelForm):
             raise ValidationError('GPA must be between 0.0 and 4.0.')
         return gpa_val
 
+    def clean_email(self):
+        """Validate email uniqueness for new students."""
+        email = self.cleaned_data.get('email')
+        if email and self.instance.pk is None:
+            # Only check uniqueness for new students (not during edit)
+            if Student.objects.filter(email=email).exists():
+                raise ValidationError('A student with this email already exists.')
+        return email
+
     def save(self, commit=True):
+        """Save the student with automatic department handling.
+        
+        If a department name is provided, it will either find an existing
+        department with that name (case-insensitive) or create a new one.
+        """
         student = super().save(commit=False)
 
         # Handle department free-text input: normalize and do case-insensitive lookup
